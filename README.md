@@ -32,3 +32,32 @@ fun main() {
 
 If you want to know how it's done, please take a look at the [corresponding blog post](https://hannomalie.github.io/posts/posts/ktx.html).
 Either that, or you can do yourself a disfavour and look at the main source file, the only source file there is :)
+
+## lit-kt - Lit with Kotlin
+
+A second experiment based on the custom string literals compiler plugin mentioned above is using Lit in Kotlin.
+
+I managed to pull off something like this:
+
+```kotlin
+class SimpleNumber : LitElement() {
+    var number: Int = 0
+        set(value) {
+            field = value
+            requestUpdate()
+        }
+
+    override fun render(): dynamic {
+        return _html("<button @click=${ { number++; } }>$number</button>")
+    }
+}
+
+customElements.define(HtmlTagName("simple-number"), SimpleNumber::class.js)
+
+val result0 = _html("<div>${SimpleNumber(number)}</div>")
+val result1 = _html("<div><simple-number></simple-number></div>")
+```
+
+I had a lot of issues with the experimental Kotlin compilation to ecma script classes, you can read all the details on
+yet another [blog post](https://hannomalie.github.io/posts/posts/lit-kt.html). You can find the code in this repository
+here, but on the branch [_lit_](https://github.com/hannomalie/ktx/tree/lit).
