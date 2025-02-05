@@ -5,6 +5,24 @@
     <title>JS Client</title>
 </head>
 <body>
-<script src="ktx.js"></script>
+<script src="lit-core.min.js" type="module"></script>
+<script type="module">
+    import {LitElement, html} from './lit-core.min.js'
+    window.LitElement = LitElement
+    window.html = html
+    class TemplateStringsArray extends Array {
+    }
+    window.TemplateStringsArray = TemplateStringsArray
+
+    class MyElement extends LitElement {
+      render() {
+        return html`<p>Hello from my template, ${foo}.</p>`;
+      }
+    }
+    customElements.define('my-element', MyElement);
+</script>
+<script src="ktx.js" type="module"></script>
+<!--<my-element />-->
+<simple-greeting foo="fromoutside"/>
 </body>
 </html>

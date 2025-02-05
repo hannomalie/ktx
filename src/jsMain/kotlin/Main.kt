@@ -28,11 +28,11 @@ private val Hello = KtxFC<HelloProps>("Hello") { props ->
 }
 
 
-fun main() {
-    createRoot(document.getElementsByTagName("body")[0]).render(
-        ktx("<Hello name='you'>").create()
-    )
-}
+//fun main() {
+//    createRoot(document.getElementsByTagName("body")[0]).render(
+//        ktx("<Hello name='you'>").create()
+//    )
+//}
 
 class KTXInterpolator : Interpolator<Any, FC<*>> {
     override fun interpolate(parts: () -> List<String>, params: () -> List<Any>) = FC<Props> {
